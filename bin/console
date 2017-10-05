@@ -11,4 +11,5 @@ require "euler_problem_54"
 # Pry.start
 
 require "irb"
+include EulerProblem54
 IRB.start(__FILE__)

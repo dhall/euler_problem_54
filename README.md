@@ -10,6 +10,34 @@ bin/console to poke around
 
 rspec or guard to run tests
 
+# Design notes
+
+There are a lot of ways to approach this problem starting from a simple script
+and going up to a full featured application. I took the approach of modeling
+the objects and trying to make the code and logic readable.
+
+I didn't build it around the poker.txt file and structure. I felt that the card
+class shouldn't need to know how to parse the contents of a file it doesn't own.
+Instead the Card class takes two arguments and parsing the file handled by a method
+in the Tournament class.
+
+Originally I made the methods for checking for one_pair?, two_pairs?, etc ensure
+that ONLY one_pair, two_pairs, etc existed i.e. one_pair? would return false for
+a hand that had 3 of a kind but it didn't feel right since, technically speaking,
+3 of a kind does contain one pair. I had decent test coverage so relaxing this
+approach was pretty straight forward to do and feel confident everything else
+still was still working as expected. I then relied on the 'rank' method to test
+a hand in order from highest possible hand to lowest.
+
+I had overlooked an edge case in my approach to test for a straight, which took
+me a bit to realize. I was trying to be a little to clever for my own good by
+subtracting the high card from the low card and looking for a distance of 4 but
+neglected to account for possible matches between the high and low. Once I found
+the problem it was an easy failing test to write, then make the test pass.
+
+Overall this was really fun to solve, this was my 28th projecteuler.net problem
+solved.
+
 # EulerProblem54
 
 In the card game poker, a hand consists of five cards and are ranked,

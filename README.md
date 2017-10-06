@@ -1,3 +1,12 @@
+# Instructions
+
+clone repo
+bundle
+bin/solve to see solution
+bin/console to poke around
+
+rspec or guard to run tests
+
 # EulerProblem54
 
 In the card game poker, a hand consists of five cards and are ranked,

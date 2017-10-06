@@ -3,7 +3,7 @@ module EulerProblem54
     require 'byebug'
     attr_reader :player_1, :player_2
     def initialize
-      @player_1, @player_2 = Player.new('Frank'), Player.new('Jim')
+      @player_1, @player_2 = Player.new, Player.new
     end
 
     def setup_player_hands_from_file

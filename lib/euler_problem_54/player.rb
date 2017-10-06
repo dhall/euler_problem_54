@@ -1,9 +1,7 @@
 module EulerProblem54
   class Player
     attr_accessor :wins, :hands
-    attr_reader :name
-    def initialize(name)
-      @name = name
+    def initialize
       @hands = []
       @wins = 0
     end

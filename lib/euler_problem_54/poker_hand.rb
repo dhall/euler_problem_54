@@ -6,10 +6,6 @@ module EulerProblem54
       @cards = [card_1,card_2,card_3,card_4,card_5]
     end
 
-    def value
-      @value ||= @cards.map(&:value).reduce(:+)
-    end
-
     def find_matches
       @find_matches ||= @cards.group_by(&:face_value).select{|_k,group| group.size > 1}
     end

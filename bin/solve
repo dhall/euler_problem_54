@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "euler_problem_54"
+
+include EulerProblem54
+
+game = Tournament.new
+game.setup_player_hands_from_file File.join(LIB_DIR,'euler_problem_54/poker.txt')
+results = game.play
+
+puts "player 1 wins #{results[:player_1]} times"

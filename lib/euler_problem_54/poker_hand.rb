@@ -1,6 +1,6 @@
 module EulerProblem54
   class PokerHand
-    require 'byebug'
+
     attr_reader :cards
     def initialize(card_1,card_2,card_3,card_4,card_5)
       @cards = [card_1,card_2,card_3,card_4,card_5]

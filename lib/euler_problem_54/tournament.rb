@@ -1,13 +1,13 @@
 module EulerProblem54
   class Tournament
-    require 'byebug'
+
     attr_reader :player_1, :player_2
     def initialize
       @player_1, @player_2 = Player.new, Player.new
     end
 
-    def setup_player_hands_from_file
-      File.open(File.join(__dir__,'poker.txt'),'r').each do |line|
+    def setup_player_hands_from_file(file)
+      File.open(file,'r').each do |line|
         card_values = line.chomp.split
         player_1.hands << build_hand(card_values[0..4])
         player_2.hands << build_hand(card_values[5..9])

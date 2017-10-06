@@ -9,7 +9,7 @@ module EulerProblem54
     end
 
     def add_win
-      wins += 1
+      @wins += 1
     end
   end
 end

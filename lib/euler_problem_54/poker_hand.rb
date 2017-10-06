@@ -1,5 +1,6 @@
 module EulerProblem54
   class PokerHand
+    require 'byebug'
     attr_reader :cards
     def initialize(card_1,card_2,card_3,card_4,card_5)
       @cards = [card_1,card_2,card_3,card_4,card_5]
@@ -13,6 +14,10 @@ module EulerProblem54
       @find_matches ||= @cards.group_by(&:face_value).select{|_k,group| group.size > 1}
     end
 
+    def find_non_matches
+      @find_non_matches ||= @cards.group_by(&:face_value).select{|_k,group| group.size == 1}
+    end
+
     def rank
       case
       when royal_flush?
@@ -22,21 +27,33 @@ module EulerProblem54
       when four_of_a_kind?
         7
       when full_house?
-        6
+        sorted_matches = find_matches.sort_by{|_k,group|group.size}
+        three_of_a_kind_value = sorted_matches.last[1][0].value
+        6.0 + (three_of_a_kind_value)/100.0
       when flush?
         5
       when straight?
         4
       when three_of_a_kind?
-        3
+        match_value = find_matches.values.flatten.first.value
+        3.0 + (match_value)/100.0
       when two_pairs?
-        2
+        sorted_matches = find_matches.sort_by{|key,_g|Card::VALID_VALUES.index(key)}
+        high_pair_value = sorted_matches.last[1][0].value
+        low_pair_value = sorted_matches.first[1][0].value
+        2.0 + (high_pair_value)/100.0 + (low_pair_value)/10_000.0
       when one_pair?
-        1
+        pair_value = find_matches.values.flatten.first.value
+        1.0 + (pair_value)/100.0
       else
         0
       end
     end
+
+    def unpaired_high_card
+      find_non_matches.sort_by{|key,_g|Card::VALID_VALUES.index(key)}.last[1][0]
+    end
+
     # High Card: Highest value card.
     def high_card
       sorted_cards.last

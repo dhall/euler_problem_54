@@ -184,9 +184,11 @@ module EulerProblem54
         hand = PokerHand.new duece_s,duece_c,duece_h,duece_d,Card.new('A','D')
         expect(hand.rank).to be 7
       end
-      it 'ranks a full house as a 6' do
+      it 'ranks a full house as a 6 plus value of the triple' do
         hand = PokerHand.new ace_h,duece_s,ace_s,duece_c,ace_c
-        expect(hand.rank).to be 6
+        expect(hand.rank).to be 6.12
+        hand = PokerHand.new ace_h,ace_c,Card.new('T','D'),Card.new('T','C'),Card.new('T','H')
+        expect(hand.rank).to be 6.08
       end
       it 'ranks a flush as 5' do
         hand = PokerHand.new Card.new('2','D'),Card.new('J','D'),Card.new('3','D'),Card.new('K','D'),Card.new('A','D')
@@ -196,23 +198,30 @@ module EulerProblem54
         hand = PokerHand.new Card.new('T','D'),Card.new('J','D'),Card.new('Q','D'),Card.new('K','D'),Card.new('9','H')
         expect(hand.rank).to be 4
       end
-      it 'ranks a three of a kind as 3' do
+      it 'ranks a three of a kind as 3 plus value of match' do
         hand = PokerHand.new ace_h,ace_c,Card.new('Q','D'),Card.new('K','D'),Card.new('A','D')
-        expect(hand.rank).to be 3
+        expect(hand.rank).to be 3.12
+        hand = PokerHand.new ace_h,duece_s,Card.new('Q','D'),Card.new('Q','H'),Card.new('Q','C')
+        expect(hand.rank).to be 3.10
       end
-      it 'ranks a two pairs as 2' do
+      it 'ranks a two pairs as 2 plus value of each pair' do
         hand = PokerHand.new duece_s,duece_c,ace_h,Card.new('K','D'),Card.new('A','D')
-        expect(hand.rank).to be 2
+        expect(hand.rank).to be 2.12
+        hand = PokerHand.new Card.new('4','D'),Card.new('6','D'),Card.new('4','S'),Card.new('K','D'),Card.new('6','H')
+        expect(hand.rank).to be 2.0402
       end
-      it 'ranks a one pair as 1' do
+      it 'ranks a one pair as 1 plus value of the pair' do
         hand = PokerHand.new ace_s,ace_h,Card.new('Q','D'),Card.new('K','D'),Card.new('2','D')
-        expect(hand.rank).to be 1
+        expect(hand.rank).to be 1.12
+        hand = PokerHand.new ace_s,duece_s,Card.new('Q','D'),Card.new('K','D'),Card.new('2','D')
+        expect(hand.rank).to be 1.0
       end
       it 'ranks nothing but a high card lowest (0)' do
         hand = PokerHand.new Card.new('T','D'),Card.new('9','C'),Card.new('7','H'),Card.new('2','S'),Card.new('A','D')
         expect(hand.rank).to be 0
       end
     end
+
 
   end
 end

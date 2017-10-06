@@ -5,6 +5,11 @@ module EulerProblem54
     def initialize(name)
       @name = name
       @hands = []
+      @wins = 0
+    end
+
+    def add_win
+      wins += 1
     end
   end
 end

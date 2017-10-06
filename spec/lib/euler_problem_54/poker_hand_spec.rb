@@ -171,6 +171,48 @@ module EulerProblem54
       end
     end
 
+    describe '#rank' do
+      it 'ranks a royal flush higest (9)' do
+        hand = PokerHand.new Card.new('T','D'),Card.new('J','D'),Card.new('Q','D'),Card.new('K','D'),Card.new('A','D')
+        expect(hand.rank).to be 9
+      end
+      it 'ranks a straight flush as an 8' do
+        hand = PokerHand.new Card.new('T','D'),Card.new('J','D'),Card.new('Q','D'),Card.new('K','D'),Card.new('9','D')
+        expect(hand.rank).to be 8
+      end
+      it 'ranks a four of a kind as a 7' do
+        hand = PokerHand.new duece_s,duece_c,duece_h,duece_d,Card.new('A','D')
+        expect(hand.rank).to be 7
+      end
+      it 'ranks a full house as a 6' do
+        hand = PokerHand.new ace_h,duece_s,ace_s,duece_c,ace_c
+        expect(hand.rank).to be 6
+      end
+      it 'ranks a flush as 5' do
+        hand = PokerHand.new Card.new('2','D'),Card.new('J','D'),Card.new('3','D'),Card.new('K','D'),Card.new('A','D')
+        expect(hand.rank).to be 5
+      end
+      it 'ranks a straight as 4' do
+        hand = PokerHand.new Card.new('T','D'),Card.new('J','D'),Card.new('Q','D'),Card.new('K','D'),Card.new('9','H')
+        expect(hand.rank).to be 4
+      end
+      it 'ranks a three of a kind as 3' do
+        hand = PokerHand.new ace_h,ace_c,Card.new('Q','D'),Card.new('K','D'),Card.new('A','D')
+        expect(hand.rank).to be 3
+      end
+      it 'ranks a two pairs as 2' do
+        hand = PokerHand.new duece_s,duece_c,ace_h,Card.new('K','D'),Card.new('A','D')
+        expect(hand.rank).to be 2
+      end
+      it 'ranks a one pair as 1' do
+        hand = PokerHand.new ace_s,ace_h,Card.new('Q','D'),Card.new('K','D'),Card.new('2','D')
+        expect(hand.rank).to be 1
+      end
+      it 'ranks nothing but a high card lowest (0)' do
+        hand = PokerHand.new Card.new('T','D'),Card.new('9','C'),Card.new('7','H'),Card.new('2','S'),Card.new('A','D')
+        expect(hand.rank).to be 0
+      end
+    end
 
   end
 end

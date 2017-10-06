@@ -13,6 +13,30 @@ module EulerProblem54
       @find_matches ||= @cards.group_by(&:face_value).select{|_k,group| group.size > 1}
     end
 
+    def rank
+      case
+      when royal_flush?
+        9
+      when straight_flush?
+        8
+      when four_of_a_kind?
+        7
+      when full_house?
+        6
+      when flush?
+        5
+      when straight?
+        4
+      when three_of_a_kind?
+        3
+      when two_pairs?
+        2
+      when one_pair?
+        1
+      else
+        0
+      end
+    end
     # High Card: Highest value card.
     def high_card
       sorted_cards.last

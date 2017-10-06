@@ -72,7 +72,7 @@ module EulerProblem54
 
     # Straight: All cards are consecutive values.
     def straight?
-      sorted_cards.last.value - sorted_cards.first.value == 4
+      !one_pair? && sorted_cards.last.value - sorted_cards.first.value == 4
     end
 
     # Flush: All cards of the same suit.

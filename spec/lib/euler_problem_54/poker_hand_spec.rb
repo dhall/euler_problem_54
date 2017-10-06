@@ -102,6 +102,10 @@ module EulerProblem54
         hand = PokerHand.new Card.new('5','D'),Card.new('9','D'),Card.new('2','S'),Card.new('J','H'),Card.new('Q','S')
         expect(hand.straight?).to be false
       end
+      it 'returns false with contained duplicate face values' do
+        hand = PokerHand.new Card.new('6','D'), Card.new('7','C'), Card.new('5','D'), Card.new('5','H'), Card.new('3','S')
+        expect(hand.straight?).to be false
+      end
     end
 
     describe '#flush?' do
